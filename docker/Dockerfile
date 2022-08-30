@@ -32,8 +32,13 @@ RUN	wget http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.25.0.tar.x
 	./configure --prefix /usr/local && make && make install &&\
 	rm -rf ../crosstool-ng*
 
-# Utilities
+# Toolchain Building
+# COPY .config  /toolchain/
+# WORKDIR /toolchain
+# RUN ct-ng build
+# RUN ct-ng clean
+# ENV PATH="${PATH}:/toolchain/aarch64-unknown-linux-gnu/bin"
 
-
+# User Workspace
 WORKDIR /workspace
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
