@@ -6,4 +6,4 @@ docker run \
     -v $(pwd):/workspace \
     -v /dev:/dev \
     --network host \
-    lorsi/crosstool /bin/bash
+    lorsi/crosstool:1.0.0 /bin/bash

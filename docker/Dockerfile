@@ -33,11 +33,14 @@ RUN	wget http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.25.0.tar.x
 	rm -rf ../crosstool-ng*
 
 # Toolchain Building
-# COPY .config  /toolchain/
-# WORKDIR /toolchain
-# RUN ct-ng build
-# RUN ct-ng clean
-# ENV PATH="${PATH}:/toolchain/aarch64-unknown-linux-gnu/bin"
+WORKDIR /toolchain
+RUN useradd -ms /bin/bash dockeruser && chown -R dockeruser /toolchain
+USER dockeruser
+
+COPY .config  /toolchain/
+RUN ct-ng build
+RUN ct-ng clean
+ENV PATH="${PATH}:/toolchain/aarch64-unknown-linux-gnu/bin"
 
 # User Workspace
 WORKDIR /workspace
