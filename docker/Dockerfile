@@ -42,6 +42,98 @@ RUN ct-ng build
 RUN ct-ng clean
 ENV PATH="${PATH}:/toolchain/aarch64-unknown-linux-gnu/bin"
 
+# U-Boot
+USER root
+RUN apt-get update && apt-get install -y \
+	automake \
+	autopoint \
+	bc \
+	binutils-dev \
+	bison \
+	build-essential \
+	coreutils \
+	cpio \
+	cppcheck \
+	curl \
+	device-tree-compiler \
+	dosfstools \
+	e2fsprogs \
+	efitools \
+	erofs-utils \
+	expect \
+	fakeroot \
+	flex \
+	gawk \
+	gdisk \
+	git \
+	gnu-efi \
+	gnutls-dev \
+	graphviz \
+	grub-efi-amd64-bin \
+	grub-efi-ia32-bin \
+	help2man \
+	iasl \
+	imagemagick \
+	iputils-ping \
+	libconfuse-dev \
+	libgit2-dev \
+	libjson-glib-dev \
+	libguestfs-tools \
+	libgnutls28-dev \
+	libgnutls30 \
+	liblz4-tool \
+	libpixman-1-dev \
+	libpython3-dev \
+	libsdl1.2-dev \
+	libsdl2-dev \
+	libseccomp-dev \
+	libssl-dev \
+	libtool \
+	libudev-dev \
+	libusb-1.0-0-dev \
+	linux-image-kvm \
+	lzma-alone \
+	lzop \
+	mount \
+	mtd-utils \
+	mtools \
+	net-tools \
+	ninja-build \
+	openssl \
+	picocom \
+	parted \
+	pkg-config \
+	python-is-python3 \
+	python2.7 \
+	python3 \
+	python3-dev \
+	python3-pip \
+	python3-sphinx \
+	python3-virtualenv \
+	rpm2cpio \
+	sbsigntool \
+	sloccount \
+	socat \
+	softhsm2 \
+	sparse \
+	srecord \
+	sudo \
+	swig \
+	util-linux \
+	uuid-dev \
+	virtualenv \
+	xxd \
+	zip \
+	&& rm -rf /var/lib/apt/lists/*
+
+# ATF -- Needed by Uboot
+WORKDIR /ATF
+ENV CROSS_COMPILE=aarch64-unknown-linux-gnu-
+RUN git clone https://github.com/ARM-software/arm-trusted-firmware.git . && \
+	make PLAT=sun50i_a64 DEBUG=1 bl31
+ENV BL31=/ATF/build/sun50i_a64/debug/bl31.bin
+
 # User Workspace
+USER dockeruser
 WORKDIR /workspace
 ENTRYPOINT [ "/sbin/dumb-init", "--" ]
