@@ -42,7 +42,7 @@ RUN ct-ng build
 RUN ct-ng clean
 ENV PATH="${PATH}:/toolchain/aarch64-unknown-linux-gnu/bin"
 
-# U-Boot
+# U-Boot dependencies
 USER root
 RUN apt-get update && apt-get install -y \
 	automake \
@@ -129,6 +129,7 @@ RUN apt-get update && apt-get install -y \
 # ATF -- Needed by Uboot
 WORKDIR /ATF
 ENV CROSS_COMPILE=aarch64-unknown-linux-gnu-
+ENV ARCH=arm
 RUN git clone https://github.com/ARM-software/arm-trusted-firmware.git . && \
 	make PLAT=sun50i_a64 DEBUG=1 bl31
 ENV BL31=/ATF/build/sun50i_a64/debug/bl31.bin
