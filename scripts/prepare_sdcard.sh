@@ -13,6 +13,8 @@ cat <<EOT | sfdisk ${card}
 ,,L
 EOT
 # Other partitions
-# mkfs.vfat ${card}${p}1
-# mkfs.ext4 ${card}${p}2
-# cardroot=${card}${p}2
+mkfs.vfat ${card}${p}1
+mkfs.ext4 ${card}${p}2
+cardroot=${card}${p}2
+
+# Ref: https://linux-sunxi.org/Bootable_SD_card#Bootloader
