@@ -3,6 +3,7 @@ export GID=$(id -g)
 
 docker run \
     --env SCP=/dev/null \
+    --env ARCH=arm64 \
     --env CROSS_COMPILE=aarch64-unknown-linux-gnu- \
     --user $UID:$GID \
     -it --rm \
