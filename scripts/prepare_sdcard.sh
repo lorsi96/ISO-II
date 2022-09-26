@@ -1,3 +1,4 @@
+## Need to be run as root!!
 readonly BOOTLOADER_PATH=./u-boot/u-boot-sunxi-with-spl.bin 
 # SD Card via MMC (micro sd)
 export card=/dev/mmcblk0

@@ -1,2 +1,2 @@
-make libretech_all_h5_cc_h5_defconfig;
+make libretech_all_h3_ccc_h5_defconfig;
 make
