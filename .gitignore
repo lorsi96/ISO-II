@@ -54,3 +54,4 @@ dkms.conf
 # Artifacts
 toolchain
 include
+nfsroot

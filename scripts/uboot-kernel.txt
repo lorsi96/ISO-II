@@ -8,6 +8,12 @@ load mmc 0:2 ${fdt_addr_r} sun50i-h5-libretech-all-h3-cc.dtb
 booti ${kernel_addr_r} - ${fdt_addr_r}
 
 # If loading from tftp
-tftp 0x400800000 Image
+tftp 0x40080000 Image
 tftp 0x4FA00000 sun50i-h5-libretech-all-h3-cc.dtb
 booti ${kernel_addr_r} - ${fdt_addr_r}
+
+# Setenv
+setenv bootargs root=/dev/nfs rw ip=10.42.0.228 console=ttyS0,115200n8 nfsroot=10.42.0.1:/home/lorsi/Documents/MSE/ISO_II/ISO-II/nfsroot,nfsvers=4,tcp ignore_loglevel
+setenv ipaddr 10.42.0.228; setenv serverip 10.42.0.1
+tftp 0x40080000 Image; tftp 0x4fa00000 sun50i-h5-libretech-all-h3-cc.dtb; booti 0x40080000 - 0x4fa00000;
+setenv bootargs root=/dev/nfs rw ip=192.168.0.100 console=ttyS0,115200n8 nfsroot=192.168.0.22:/home/lorsi/Documents/MSE/ISO_II/ISO-II/nfsroot,nfsvers=4,udp
